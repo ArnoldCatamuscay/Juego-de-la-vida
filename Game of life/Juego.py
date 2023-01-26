@@ -1,4 +1,4 @@
-import pygame, sys,random
+import pygame, sys
 from pygame.locals import *
 from Tablero import Tablero
 
@@ -58,63 +58,41 @@ class Juego:
         # Return the screen, the background surface, and the game clock
         return screen, bg, clock
 
-    # Create a "seed" board of given dimensions at random
-    def make_random_board(self, board_dimensions, occupancy):
-        # Instantiate the board as a dictionary with a fraction occupied
-        # 0 indicates an empty cell; 1 indicates an occupied cell
-        # board = dict()
-        for x in range(board_dimensions[0]):
-            for y in range(board_dimensions[1]):
-                if random.random() < occupancy:
-                    board[(x, y)] = 1
-                else:
-                    board[(x, y)] = 0
-        # Return the board
-        return board
+    # # Create a "seed" board of given dimensions at random
+    # def make_random_board(self, board_dimensions, occupancy):
+    #     # Instantiate the board as a dictionary with a fraction occupied
+    #     # 0 indicates an empty cell; 1 indicates an occupied cell
+    #     board = self.tablero.board
+    #     for x in range(board_dimensions[0]):
+    #         for y in range(board_dimensions[1]):
+    #             if random.random() < occupancy:
+    #                 board[(x, y)] = 1
+    #             else:
+    #                 board[(x, y)] = 0
+    #     # Return the board
+    #     return board
 
 
-    # Update the board according to the rules of the game
-    def update_board(self, board):
-        # For every cell in the board...
-        for cell in board:
-            # How many occupied neighbors does this cell have?
-            neighbors = self.count_neighbors(cell, board)
-            val = board[cell]
-            # If the cell is empty and has 3 neighbors, mark it for occupation
-            if board[cell] == 0 and neighbors == 3:
-                board[cell] = 2
-            # On the other hand, if the cell is occupied and doesn't have 2 or 3
-            # neighbors, mark it for death
-            elif board[cell] == 1 and not neighbors in [2, 3]:
-                board[cell] = -1
-        # Now, go through it again, making all the approved changes
-        for cell in board:
-            if board[cell] == 2: board[cell] = 1
-            if board[cell] == -1: board[cell] = 0
+    # # Update the board according to the rules of the game
+    # def update_board(self, board):
+    #     # For every cell in the board...
+    #     for cell in board:
+    #         # How many occupied neighbors does this cell have?
+    #         neighbors = self.count_neighbors(cell, board)
+    #         val = board[cell]
+    #         # If the cell is empty and has 3 neighbors, mark it for occupation
+    #         if board[cell] == 0 and neighbors == 3:
+    #             board[cell] = 2
+    #         # On the other hand, if the cell is occupied and doesn't have 2 or 3
+    #         # neighbors, mark it for death
+    #         elif board[cell] == 1 and not neighbors in [2, 3]:
+    #             board[cell] = -1
+    #     # Now, go through it again, making all the approved changes
+    #     for cell in board:
+    #         if board[cell] == 2: board[cell] = 1
+    #         if board[cell] == -1: board[cell] = 0
 
 
-    # Return the number of occupied neighbors this cell has
-    def count_neighbors(self, cell, board):
-        # Figure out the potential neighboring cells (need to watch the edges)
-        #            ( i-1       ,   j    ), (     i-1   ,       j-1  ), Estan en desorden
-        neighbors = [(cell[0] - 1, cell[1]), (cell[0] - 1, cell[1] - 1),
-                    (cell[0], cell[1] - 1), (cell[0] + 1, cell[1] - 1),
-                    (cell[0] + 1, cell[1]), (cell[0] + 1, cell[1] + 1),
-                    (cell[0], cell[1] + 1), (cell[0] - 1, cell[1] + 1)]
-        # For each potential neighbor, if the cell is occupied add one to the score
-        score = 0
-        for neighbor in neighbors:
-            # Is this a real neighbor, or is it out-of-bounds? FRONTERA
-            if neighbor in board.keys():
-                # Remember that neighbors which are marked for death count, too!
-                if board[neighbor] in [1, -1]: score += 1
-        # Return the score
-        return score
+    
 
-    # Draw the board on the background
-    def draw_board(self, board, bg):
-        # Draw every cell in the board as a rectangle on the screen
-        for cell in board:
-            rectangle = (cell[0] * self.cell_dimensions[0], cell[1] * self.cell_dimensions[1],
-                            self.cell_dimensions[0], self.cell_dimensions[1])
-            pygame.draw.rect(bg, self.colors[board[cell]], rectangle)
+    
