@@ -1,12 +1,13 @@
 from Celdas import Celda
 import numpy as np
-import random
+import random, pygame
 
 class Tablero:
-    def __init__(self, cell_colors, cell_dimensions, board_dimensions):
+    def __init__(self, cell_colors, cell_dimensions, board_dimensions, occupancy):
         self.cell_colors = cell_colors
         self.board_dimensions = board_dimensions
         self.cell_dimensions = cell_dimensions
+        self.occupancy = occupancy
         self.board = [[Celda(cell_dimensions[0], cell_dimensions[1], x, y, cell_colors[0]) for x in range(board_dimensions[0])] for y in range(board_dimensions[1])]
 
     def inicializar_patron(self, pattern):
@@ -15,12 +16,12 @@ class Tablero:
 
 
     # Create a "seed" board of given dimensions at random
-    def make_random_board(self, board_dimensions, occupancy):
+    def make_random_board(self):
         # Instantiate the board as a dictionary with a fraction occupied
         # 0 indicates an empty cell; 1 indicates an occupied cell
-        for x in range(board_dimensions[0]):
-            for y in range(board_dimensions[1]):
-                if random.random() < occupancy:
+        for x in range(self.board_dimensions[0]):
+            for y in range(self.board_dimensions[1]):
+                if random.random() < self.occupancy:
                     self.board[x][y].esta_viva
                 else:
                     self.board[x][y].esta_muerta
@@ -53,11 +54,11 @@ class Tablero:
     # Return the number of occupied neighbors this cell has
     def count_neighbors(self, cell, board):
         # Figure out the potential neighboring cells (need to watch the edges)
-        #            ( i-1       ,   j    ), (     i-1   ,       j-1  ), Estan en desorden
-        neighbors = [(cell[0] - 1, cell[1]), (cell[0] - 1, cell[1] - 1),
-                    (cell[0], cell[1] - 1), (cell[0] + 1, cell[1] - 1),
-                    (cell[0] + 1, cell[1]), (cell[0] + 1, cell[1] + 1),
-                    (cell[0], cell[1] + 1), (cell[0] - 1, cell[1] + 1)]
+        # cell es self.board[i][j]
+        #            (     i-1   ,   j-1      ),(     i-1   ,     j  ), (  i-1    ,   j+1   )
+        neighbors = [(cell[0] - 1, cell[1] - 1),(cell[0] - 1, cell[1]), (cell[0] - 1, cell[1] + 1), 
+                    (cell[0], cell[1] - 1),(cell[0], cell[1] + 1)
+                    (cell[0] + 1, cell[1] - 1),(cell[0] + 1, cell[1]), (cell[0] + 1, cell[1] + 1)]
         # For each potential neighbor, if the cell is occupied add one to the score
         score = 0
         for neighbor in neighbors:
@@ -70,9 +71,10 @@ class Tablero:
 
 
     # Draw the board on the background
-    def draw_board(self, board, bg):
+    def draw_board(self, bg):
         # Draw every cell in the board as a rectangle on the screen
-        for cell in board:
-            rectangle = (cell[0] * self.cell_dimensions[0], cell[1] * self.cell_dimensions[1],
-                            self.cell_dimensions[0], self.cell_dimensions[1])
-            pygame.draw.rect(bg, self.colors[board[cell]], rectangle)
+        for i in range(len(self.board)):
+            for j in range(len(self.board[i])):
+                rectangle = (self.board[0] * self.cell_dimensions[0], self.board[1] * self.cell_dimensions[1],
+                                self.cell_dimensions[0], self.cell_dimensions[1])
+                pygame.draw.rect(bg, self.colors[self.board[i][j].color], rectangle)
