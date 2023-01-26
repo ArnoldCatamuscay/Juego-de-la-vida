@@ -26,7 +26,7 @@ class Juego:
             # Update the board
             self.tablero.update_board()
             # Draw the board on the background
-            self.draw_board(board, bg)
+            self.tablero.draw_board(bg)
             # Blit bg to the screen, flip display buffers
             screen.blit(bg, (0, 0))
             pygame.display.flip()

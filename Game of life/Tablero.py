@@ -22,9 +22,9 @@ class Tablero:
         for x in range(self.board_dimensions[0]):
             for y in range(self.board_dimensions[1]):
                 if random.random() < self.occupancy:
-                    self.board[x][y].esta_viva
+                    self.board[x][y].esta_viva()
                 else:
-                    self.board[x][y].esta_muerta
+                    self.board[x][y].esta_muerta()
         # Return the board
         return self.board
 
@@ -36,19 +36,19 @@ class Tablero:
             for j in range(len(self.board[i])):
                 # How many occupied neighbors does this cell have?
                 neighbors = self.count_neighbors(self.board[i][j], self.board)
-                val = self.board[i][j]
+                estado = self.board[i][j].estado
                 # If the cell is empty and has 3 neighbors, mark it for occupation
-                if self.board[i][j].estado == 0 and neighbors == 3:
-                    self.board[i][j].estado = 2
+                if estado == 0 and neighbors == 3:
+                    estado = 2
                 # On the other hand, if the cell is occupied and doesn't have 2 or 3
                 # neighbors, mark it for death
-                elif self.board[i][j].estado == 1 and not neighbors in [2, 3]:
-                    self.board[i][j].estado = -1
+                elif estado == 1 and not neighbors in [2, 3]:
+                    estado = -1
         # Now, go through it again, making all the approved changes
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
-                if self.board[i][j].estado == 2: self.board[i][j].esta_viva 
-                if self.board[i][j].estado == -1: self.board[i][j].esta_muerta
+                if self.board[i][j].estado == 2: self.board[i][j].esta_viva()
+                if self.board[i][j].estado == -1: self.board[i][j].esta_muerta()
 
 
     # Return the number of occupied neighbors this cell has
@@ -56,16 +56,16 @@ class Tablero:
         # Figure out the potential neighboring cells (need to watch the edges)
         # cell es self.board[i][j]
         #            (     i-1   ,   j-1      ),(     i-1   ,     j  ), (  i-1    ,   j+1   )
-        neighbors = [(cell[0] - 1, cell[1] - 1),(cell[0] - 1, cell[1]), (cell[0] - 1, cell[1] + 1), 
-                    (cell[0], cell[1] - 1),(cell[0], cell[1] + 1)
-                    (cell[0] + 1, cell[1] - 1),(cell[0] + 1, cell[1]), (cell[0] + 1, cell[1] + 1)]
+        neighbors = [(cell.pos_x - 1, cell.pos_y - 1),(cell.pos_x - 1, cell.pos_y), (cell.pos_x - 1, cell.pos_y + 1),
+                    (cell.pos_x, cell.pos_y - 1),(cell.pos_x, cell.pos_y + 1),
+                    (cell.pos_x + 1, cell.pos_y - 1),(cell.pos_x + 1, cell.pos_y), (cell.pos_x + 1, cell.pos_y + 1)]
         # For each potential neighbor, if the cell is occupied add one to the score
         score = 0
         for neighbor in neighbors:
             # Is this a real neighbor, or is it out-of-bounds? FRONTERA
-            if neighbor in board.keys():
+            if neighbor[0] >= 0 and neighbor[1] >= 0 and neighbor[0] < self.board_dimensions[0] and neighbor[1] < self.board_dimensions[1]:
                 # Remember that neighbors which are marked for death count, too!
-                if board[neighbor] in [1, -1]: score += 1
+                if self.board[neighbor[0]][neighbor[1]].estado in [1, -1]: score += 1
         # Return the score
         return score
 
@@ -77,4 +77,4 @@ class Tablero:
             for j in range(len(self.board[i])):
                 rectangle = (self.board[0] * self.cell_dimensions[0], self.board[1] * self.cell_dimensions[1],
                                 self.cell_dimensions[0], self.cell_dimensions[1])
-                pygame.draw.rect(bg, self.colors[self.board[i][j].color], rectangle)
+                pygame.draw.rect(bg, self.cell_colors[self.board[i][j].color], rectangle)
