@@ -12,6 +12,9 @@ class Juego:
 
 
     def ejecutar_juego(self, pattern):
+        print("Executing...")
+        print("[Press r to restart]")
+        print("[Press esc to quit]")
         # Initialize pygame elements
         screen, bg, clock = self.init_pygame(self.tablero.board_dimensions)
         # Initialize random board
@@ -35,6 +38,7 @@ class Juego:
                     pygame.quit()
                     sys.exit()
                 if e.type == pygame.KEYDOWN and e.key == pygame.K_r:
+                    print("\tRestarted...")
                     self.ejecutar_juego(pattern)
 
 
