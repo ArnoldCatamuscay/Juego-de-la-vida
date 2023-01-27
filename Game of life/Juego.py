@@ -1,4 +1,5 @@
 import pygame, sys
+from pygame.locals import *
 from Tablero import Tablero
 
 class Juego:
@@ -7,7 +8,6 @@ class Juego:
         self.version = version
         self.cell_dimensions = cell_dimensions
         self.framerate = framerate
-        self.colors = colors
         self.tablero = Tablero(colors, cell_dimensions, board_dimensions, occupancy)
 
 
@@ -34,8 +34,7 @@ class Juego:
                 if e.type == pygame.QUIT or (e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE):
                     pygame.quit()
                     sys.exit()
-                # if e.type == QUIT:
-                #     quit_game = True
+                # if e.type == QUIT: quit_game = True
         # Print farewell message
         print("Thanks for watching!")
 

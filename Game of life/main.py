@@ -26,5 +26,6 @@ def main(args):
 # The following code is executed upon command-line invocation
 if __name__ == "__main__":
     program = testit(sys.argv)
+    print("")
     print(sys.argv)# "life.py 80 80"
     program.start()

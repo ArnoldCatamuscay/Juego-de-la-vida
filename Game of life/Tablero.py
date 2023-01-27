@@ -1,5 +1,4 @@
 from Celdas import Celda
-import numpy as np
 import random, pygame
 
 class Tablero:
@@ -10,9 +9,10 @@ class Tablero:
         self.occupancy = occupancy
         self.board = [[Celda(cell_dimensions[0], cell_dimensions[1], x, y, cell_colors[0]) for x in range(board_dimensions[0])] for y in range(board_dimensions[1])]
 
+
     def inicializar_patron(self, pattern):
         if pattern == "random":
-            print("Patron: " + pattern)
+            print("\nPatron: " + pattern)
             self.make_random_board()
 
 
@@ -42,11 +42,11 @@ class Tablero:
                 estado = self.board[i][j].estado
                 # If the cell is empty and has 3 neighbors, mark it for occupation
                 if estado == 0 and neighbors == 3:
-                    estado = 2
+                    self.board[i][j].estado = 2
                 # On the other hand, if the cell is occupied and doesn't have 2 or 3
                 # neighbors, mark it for death
                 elif estado == 1 and not neighbors in [2, 3]:
-                    estado = -1
+                    self.board[i][j].estado = -1
         # Now, go through it again, making all the approved changes
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
