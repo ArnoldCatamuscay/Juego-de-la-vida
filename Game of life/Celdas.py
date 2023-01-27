@@ -4,7 +4,7 @@ class Celda:
         self.tam_y = tam_y #tamaño de la celula en y
         self.pos_x = pos_x #tamaño de la celula en x
         self.pos_y = pos_y #tamaño de la celula en y
-        self.color = color #color de la celula
+        # self.color = color #color de la celula
         self.estado = estado_inicial #estado de la celula
 
     def esta_viva(self):

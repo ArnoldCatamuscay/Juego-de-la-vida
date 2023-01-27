@@ -13,7 +13,7 @@ class Juego:
 
     def ejecutar_juego(self):
         # Initialize pygame elements
-        screen, bg, clock = self.init_pygame(self.tablero.board_dimensions, self.title, self.version, self.cell_dimensions)
+        screen, bg, clock = self.init_pygame(self.tablero.board_dimensions)
         # Initialize random board
         self.tablero.inicializar_patron("random")
         # board = self.tablero.make_random_board()
@@ -35,20 +35,22 @@ class Juego:
                     pygame.quit()
                     sys.exit()
                 # if e.type == QUIT: quit_game = True
+                if e.type == pygame.KEYDOWN and e.key == pygame.K_r:
+                    self.ejecutar_juego()
         # Print farewell message
         print("Thanks for watching!")
 
 
     # Initialize pygame elements
-    def init_pygame(self, board_dimensions, title, version, cell_dimensions):
+    def init_pygame(self, board_dimensions):
         # Initialize the pygame modules
         pygame.init()
         # Determine and set the screen dimensions
-        dimensions = (board_dimensions[0] * cell_dimensions[0],
-                        board_dimensions[1] * cell_dimensions[1])
+        dimensions = (board_dimensions[0] * self.cell_dimensions[0],
+                        board_dimensions[1] * self.cell_dimensions[1])
         screen = pygame.display.set_mode(dimensions)
         # Set the title string of the root window
-        pygame.display.set_caption(title + " " + version)
+        pygame.display.set_caption(self.title + " " + self.version)
         # Grab the background surface of the screen
         bg = screen.convert()
         # Grab the game clock

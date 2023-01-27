@@ -12,7 +12,7 @@ class Tablero:
 
     def inicializar_patron(self, pattern):
         if pattern == "random":
-            print("\nPatron: " + pattern)
+            # print("\nPatron: " + pattern)
             self.make_random_board()
 
 
