@@ -17,7 +17,6 @@ class Tablero:
 
     # Create a "seed" board of given dimensions at random
     def make_random_board(self):
-        # Instantiate the board as a dictionary with a fraction occupied
         # 0 indicates an empty cell; 1 indicates an occupied cell
         for x in range(self.board_dimensions[0]):
             for y in range(self.board_dimensions[1]):
