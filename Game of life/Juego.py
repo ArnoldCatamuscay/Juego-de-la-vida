@@ -1,5 +1,4 @@
 import pygame, sys
-from pygame.locals import *
 from Tablero import Tablero
 
 class Juego:
@@ -8,7 +7,6 @@ class Juego:
         self.version = version
         self.cell_dimensions = cell_dimensions
         self.framerate = framerate
-        self.occupancy = occupancy
         self.colors = colors
         self.tablero = Tablero(colors, cell_dimensions, board_dimensions, occupancy)
 
@@ -17,7 +15,8 @@ class Juego:
         # Initialize pygame elements
         screen, bg, clock = self.init_pygame(self.tablero.board_dimensions, self.title, self.version, self.cell_dimensions)
         # Initialize random board
-        board = self.tablero.make_random_board()
+        self.tablero.inicializar_patron("random")
+        # board = self.tablero.make_random_board()
         # Enter the game loop
         quit_game = False
         while not quit_game:
