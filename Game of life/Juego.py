@@ -11,7 +11,7 @@ class Juego:
         self.tablero = Tablero(cell_colors, cell_dimensions, board_dimensions, occupancy)
 
 
-    def ejecutar_juego(self, pattern):
+    def iniciar_simulacion(self, pattern):
         print("Executing...")
         print("[Press r to restart]")
         print("[Press esc to quit]")
@@ -39,7 +39,7 @@ class Juego:
                     sys.exit()
                 if e.type == pygame.KEYDOWN and e.key == pygame.K_r:
                     print("\tRestarted...")
-                    self.ejecutar_juego(pattern)
+                    self.iniciar_simulacion(pattern)
 
 
     # Initialize pygame elements

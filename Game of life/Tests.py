@@ -3,13 +3,17 @@ from threading import Thread
 from Juego import Juego
 
 class testit(Thread):
-    def __init__(self):
+    def __init__(self, type_test):
         Thread.__init__(self)
+        self.type = type_test
 
     def run(self):
-        self.main()
+        if self.type == "default":
+            self.by_default()
+        elif self.type == "input":
+            self.by_input()
 
-    def main(self):
+    def by_input(self):
         print("==========================================================================================")
         c_dim_x = int(input("Ingrese un numero entero para el ancho de las celdas: "))#8
         c_dim_y = int(input("Ingrese un numero entero para el alto de las celdas: "))#8
@@ -30,4 +34,14 @@ class testit(Thread):
                                         occupancy=v_occupancy,
                                         cell_colors={0: (r1, g1, b1), 1: (r2, g2, b2)},
                                         board_dimensions=(b_dim, b_dim))
-        objeto_simuladorAC.ejecutar_juego("random")
+        objeto_simuladorAC.iniciar_simulacion("random")
+
+    def by_default(self):
+        objeto_simuladorAC = Juego(title="The Game of Life",
+                                        version="2.0",
+                                        cell_dimensions=(8,8),
+                                        framerate=20,
+                                        occupancy=0.20,
+                                        cell_colors={0: (0, 0, 0), 1: (200, 200, 100)},
+                                        board_dimensions=(80, 80))
+        objeto_simuladorAC.iniciar_simulacion("random")

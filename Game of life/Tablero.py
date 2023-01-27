@@ -7,12 +7,11 @@ class Tablero:
         self.board_dimensions = board_dimensions
         self.cell_dimensions = cell_dimensions
         self.occupancy = occupancy
-        self.board = [[Celda(cell_dimensions[0], cell_dimensions[1], x, y, cell_colors[0]) for x in range(board_dimensions[0])] for y in range(board_dimensions[1])]
+        self.board = [[Celda(cell_dimensions[0], cell_dimensions[1], x, y) for x in range(board_dimensions[0])] for y in range(board_dimensions[1])]
 
 
     def inicializar_patron(self, pattern):
         if pattern == "random":
-            # print("\nPatron: " + pattern)
             self.make_random_board()
 
 
@@ -21,15 +20,11 @@ class Tablero:
         # Instantiate the board as a dictionary with a fraction occupied
         # 0 indicates an empty cell; 1 indicates an occupied cell
         for x in range(self.board_dimensions[0]):
-            # print("\n")
             for y in range(self.board_dimensions[1]):
                 if random.random() < self.occupancy:
                     self.board[x][y].esta_viva()
                 else:
                     self.board[x][y].esta_muerta()
-                # print("Tablero: " + str(self.board[x][y].estado) + ", ", end='')
-        # Return the board
-        # return self.board
 
 
     # Update the board according to the rules of the game
@@ -78,6 +73,5 @@ class Tablero:
         # Draw every cell in the board as a rectangle on the screen
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
-                # rectangle = (self.board[0] * self.cell_dimensions[0], self.board[1] * self.cell_dimensions[1], self.cell_dimensions[0], self.cell_dimensions[1])
                 rectangle = (self.board[i][j].pos_x * self.cell_dimensions[0], self.board[i][j].pos_y * self.cell_dimensions[1], self.cell_dimensions[0], self.cell_dimensions[1])
-                pygame.draw.rect(bg, self.cell_colors[self.board[i][j].estado], rectangle)# pygame.draw.rect(bg, self.cell_colors[self.board[i][j].color], rectangle)
+                pygame.draw.rect(bg, self.cell_colors[self.board[i][j].estado], rectangle)
