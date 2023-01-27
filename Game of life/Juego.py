@@ -11,15 +11,13 @@ class Juego:
         self.tablero = Tablero(colors, cell_dimensions, board_dimensions, occupancy)
 
 
-    def ejecutar_juego(self):
+    def ejecutar_juego(self, pattern):
         # Initialize pygame elements
         screen, bg, clock = self.init_pygame(self.tablero.board_dimensions)
         # Initialize random board
-        self.tablero.inicializar_patron("random")
-        # board = self.tablero.make_random_board()
+        self.tablero.inicializar_patron(pattern)
         # Enter the game loop
-        quit_game = False
-        while not quit_game:
+        while True:
             # Slow things down to match the framerate
             clock.tick(self.framerate)
             # Update the board
@@ -32,13 +30,12 @@ class Juego:
             # Queue user input to catch QUIT signals
             for e in pygame.event.get():
                 if e.type == pygame.QUIT or (e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE):
+                    # Print farewell message
+                    print("\nThanks for watching!")
                     pygame.quit()
                     sys.exit()
-                # if e.type == QUIT: quit_game = True
                 if e.type == pygame.KEYDOWN and e.key == pygame.K_r:
-                    self.ejecutar_juego()
-        # Print farewell message
-        print("Thanks for watching!")
+                    self.ejecutar_juego(pattern)
 
 
     # Initialize pygame elements
@@ -46,8 +43,7 @@ class Juego:
         # Initialize the pygame modules
         pygame.init()
         # Determine and set the screen dimensions
-        dimensions = (board_dimensions[0] * self.cell_dimensions[0],
-                        board_dimensions[1] * self.cell_dimensions[1])
+        dimensions = (board_dimensions[0] * self.cell_dimensions[0], board_dimensions[1] * self.cell_dimensions[1])
         screen = pygame.display.set_mode(dimensions)
         # Set the title string of the root window
         pygame.display.set_caption(self.title + " " + self.version)

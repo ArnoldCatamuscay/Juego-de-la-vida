@@ -20,7 +20,7 @@ def main(args):
                                     occupancy=0.20,
                                     colors={0: (0, 0, 0), 1: (200, 200, 100)},
                                     board_dimensions=(int(args[1]), int(args[2])))
-    objeto_simuladorAC.ejecutar_juego()
+    objeto_simuladorAC.ejecutar_juego("random")
 
 
 # The following code is executed upon command-line invocation

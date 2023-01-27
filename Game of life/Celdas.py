@@ -13,8 +13,8 @@ class Celda:
     def esta_muerta(self):
         self.estado = 0
 
-    def cambiar_estado(self):
-        if self.estado == 0:
-            self.esta_viva()
-        else:
-            self.esta_muerta()
+    # def cambiar_estado(self):
+    #     if self.estado == 0:
+    #         self.esta_viva()
+    #     else:
+    #         self.esta_muerta()

@@ -29,7 +29,7 @@ class Tablero:
                     self.board[x][y].esta_muerta()
                 # print("Tablero: " + str(self.board[x][y].estado) + ", ", end='')
         # Return the board
-        return self.board
+        # return self.board
 
 
     # Update the board according to the rules of the game
@@ -57,8 +57,8 @@ class Tablero:
     # Return the number of occupied neighbors this cell has
     def count_neighbors(self, cell):
         # Figure out the potential neighboring cells (need to watch the edges)
-        # cell es self.board[i][j]
-        #            (     i-1   ,   j-1      ),(     i-1   ,     j  ), (  i-1    ,   j+1   )
+        # cell : self.board[i][j]
+        #            (     i-1      ,      j-1      ),(      i-1     ,     j     ), (     i-1      ,      j+1      )
         neighbors = [(cell.pos_x - 1, cell.pos_y - 1),(cell.pos_x - 1, cell.pos_y), (cell.pos_x - 1, cell.pos_y + 1),
                     (cell.pos_x, cell.pos_y - 1),(cell.pos_x, cell.pos_y + 1),
                     (cell.pos_x + 1, cell.pos_y - 1),(cell.pos_x + 1, cell.pos_y), (cell.pos_x + 1, cell.pos_y + 1)]
