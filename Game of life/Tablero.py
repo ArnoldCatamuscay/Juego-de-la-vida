@@ -75,6 +75,7 @@ class Tablero:
         # Draw every cell in the board as a rectangle on the screen
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
-                rectangle = (self.board[0] * self.cell_dimensions[0], self.board[1] * self.cell_dimensions[1],
-                                self.cell_dimensions[0], self.cell_dimensions[1])
-                pygame.draw.rect(bg, self.cell_colors[self.board[i][j].color], rectangle)
+                # rectangle = (self.board[0] * self.cell_dimensions[0], self.board[1] * self.cell_dimensions[1],
+                #                 self.cell_dimensions[0], self.cell_dimensions[1])
+                rectangle = (self.board[i][j].pos_x * self.cell_dimensions[0], self.board[i][j].pos_y * self.cell_dimensions[1], self.cell_dimensions[0], self.cell_dimensions[1])
+                pygame.draw.rect(bg, self.board[i][j].color, rectangle)# pygame.draw.rect(bg, self.cell_colors[self.board[i][j].color], rectangle)
