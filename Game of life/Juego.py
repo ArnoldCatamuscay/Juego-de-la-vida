@@ -1,14 +1,14 @@
 import pygame, sys
-from pygame.locals import *
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_r
 from Tablero import Tablero
 
 class Juego:
-    def __init__(self, title, version, cell_dimensions, framerate, occupancy, colors, board_dimensions):
+    def __init__(self, title, version, cell_dimensions, framerate, occupancy, cell_colors, board_dimensions):
         self.title = title
         self.version = version
         self.cell_dimensions = cell_dimensions
         self.framerate = framerate
-        self.tablero = Tablero(colors, cell_dimensions, board_dimensions, occupancy)
+        self.tablero = Tablero(cell_colors, cell_dimensions, board_dimensions, occupancy)
 
 
     def ejecutar_juego(self, pattern):
