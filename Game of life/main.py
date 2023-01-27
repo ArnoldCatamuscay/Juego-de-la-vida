@@ -1,4 +1,4 @@
 from Tests import testit
 
-program = testit("input")
+program = testit("default")
 program.start()
