@@ -25,15 +25,15 @@ class testit(Thread):
         color_viva = input("Ingrese 3 numeros enteros separados por espacio para el RGB de la celulas vivas: ")#200,200,100
         d, e, f = color_viva.split()
         r2, g2, b2 = int(d), int(e), int(f)
-        b_dim = int(input("Ingrese un numero entero para el ancho y alto del lattice: "))#80
-        # b_dim_y = int(input("Alto del lattice: "))#80
+        b_dim_x = int(input("Ingrese un numero entero para el ancho del lattice: "))#80
+        b_dim_y = int(input("Ingrese un numero entero para el alto del lattice: "))#80
         objeto_simuladorAC = Juego(title="The Game of Life",
                                         version="2.0",
                                         cell_dimensions=(c_dim_x,c_dim_y),
                                         framerate=v_framerate,
                                         occupancy=v_occupancy,
                                         cell_colors={0: (r1, g1, b1), 1: (r2, g2, b2)},
-                                        board_dimensions=(b_dim, b_dim))
+                                        board_dimensions=(b_dim_x, b_dim_y))
         objeto_simuladorAC.iniciar_simulacion("random")
 
     def by_default(self):

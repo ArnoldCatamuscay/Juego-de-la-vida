@@ -8,7 +8,38 @@ class Tablero:
         self.occupancy = occupancy
         self.board = dict()
 
+    #Getters and setters
+    def get_colors(self):
+        return self.colors
 
+    def set_colors(self, new_colors):
+        self.colors = new_colors
+
+    def get_board_dimensions(self):
+        return self.board_dimensions
+
+    def set_board_dimensions(self, new_board_dimensions):
+        self.board_dimensions = new_board_dimensions
+
+    def get_cell_dimensions(self):
+        return self.cell_dimensions
+
+    def set_cell_dimensions(self, new_cell_dimensions):
+        self.cell_dimensions = new_cell_dimensions
+
+    def get_occupancy(self):
+        return self.occupancy
+
+    def set_occupancy(self, new_occupancy):
+        self.occupancy = new_occupancy
+
+    def get_board(self):
+        return self.board
+
+    def set_board(self, new_board):
+        self.board = new_board
+
+    #Functions
     def inicializar_patron(self, pattern):
         if pattern == "random":
             self.make_random_board()

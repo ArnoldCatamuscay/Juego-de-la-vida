@@ -3,20 +3,45 @@ from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_r
 from Tablero import Tablero
 
 class Juego:
+
     def __init__(self, title, version, cell_dimensions, framerate, occupancy, cell_colors, board_dimensions):
         self.title = title
         self.version = version
-        self.cell_dimensions = cell_dimensions
         self.framerate = framerate
         self.tablero = Tablero(cell_colors, cell_dimensions, board_dimensions, occupancy)
 
+    #Getters and setters
+    def get_title(self):
+        return self.title
 
+    def set_title(self, new_title):
+        self.title = new_title
+
+    def get_version(self):
+        return self.version
+
+    def set_version(self, new_version):
+        self.version = new_version
+
+    def get_framerate(self):
+        return self.framerate
+
+    def set_framerate(self, new_framerate):
+        self.framerate = new_framerate
+
+    def get_tablero(self):
+        return self.tablero
+
+    def set_tablero(self, new_tablero):
+        self.tablero = new_tablero
+
+    #Functions
     def iniciar_simulacion(self, pattern):
         print("Executing...")
         print("[Press r to restart]")
         print("[Press esc to quit]")
         # Initialize pygame elements
-        screen, bg, clock = self.init_pygame(self.tablero.board_dimensions)
+        screen, bg, clock = self.init_pygame(self.tablero.get_board_dimensions())
         # Initialize random board
         self.tablero.inicializar_patron(pattern)
         # Enter the game loop
@@ -47,7 +72,7 @@ class Juego:
         # Initialize the pygame modules
         pygame.init()
         # Determine and set the screen dimensions
-        dimensions = (board_dimensions[0] * self.cell_dimensions[0], board_dimensions[1] * self.cell_dimensions[1])
+        dimensions = (board_dimensions[0] * self.tablero.get_cell_dimensions()[0], board_dimensions[1] * self.tablero.get_cell_dimensions()[1])
         screen = pygame.display.set_mode(dimensions)
         # Set the title string of the root window
         pygame.display.set_caption(self.title + " " + self.version)
