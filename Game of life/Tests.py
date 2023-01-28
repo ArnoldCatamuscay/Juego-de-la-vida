@@ -1,4 +1,3 @@
-import sys
 from threading import Thread
 from Juego import Juego
 
